@@ -1,7 +1,7 @@
-## 一些经典的JS题目
-## 面试常见的题目
-## 初学者可以了解一下
-## 不对IE做支持，请用chrome/firefox/opera打开。
+## 一些经典的JS题目面试常见
+
+- 初学者可以了解一下
+<font color="red">不对IE做支持，请用chrome/firefox/opera打开。</font>
 
 
 ### 99乘法表带动画

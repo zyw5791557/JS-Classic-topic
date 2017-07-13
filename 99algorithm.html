@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>99算法</title>
+    <style>
+        #box-wrap {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        span {
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            border: 1px solid #999;
+            text-align: center;
+            line-height: 50px;
+            margin: -1px -1px 0 0;
+        }
+
+        #result {
+            width: 550px;
+            margin: 30px auto;
+            font-size: 0;
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        }
+
+        #result span {
+            display: inline-block;
+            zoom: 1;
+            width: 60px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            border: 1px solid #ddd;
+            margin: -1px 0 0 -1px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='box-wrap'>
+
+    </div>
+    <div id="result"></div>
+    <script>
+        // 方法一
+        // var box = document.getElementById('box-wrap');
+        // var sleep = function(delay) {
+        //     return new Promise(function(resolve, reject) {
+        //         setTimeout(function() {
+        //             resolve();
+        //         }, delay);
+        //     });
+        // }
+        // async function demo(len) {
+        //     var oHtml = [];
+        //     var limit = len;
+        //     for(var i = 1; i <= len; i++) {
+        //         for(var j = 1; j <= i; j++) {
+        //             var s = document.createElement('span');
+        //             s.innerHTML = i + 'x' + j + '=' + (i * j);
+        //             await sleep(30);
+        //             box.appendChild(s);
+        //             oHtml.push('<span>' + i + 'x' + j + '=' + (i * j) + '</span>');
+        //         }
+        //         var b = document.createElement('br');
+        //         box.appendChild(b);
+        //         oHtml.push('</br>');
+        //     }
+        //     return oHtml.join(',');
+        // }
+        // function run(len, delay) {
+        //     demo(len).then(res => {
+        //         var r = res.split(','),
+        //             t = res.split(',');
+        //         var l = 0;
+        //         var oTime = setInterval(function() {
+        //             if(l !== t.length) {
+        //                 t.splice(-1, 1);
+        //                 box.innerHTML = t.join('');
+        //             }else {
+        //                 box.innerHTML = r.join('');
+        //                 clearInterval(oTime);
+        //             }
+        //         }, delay);
+        //     });
+
+        // }
+
+        // // 执行
+        // run(9, 30);
+
+        // 方法二
+        var box = document.getElementById('box-wrap');
+        var sleep = function (delay) {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    resolve();
+                }, delay);
+            });
+        }
+        async function demo(len, delay) {
+            var oHtml = [];
+            var limit = len;
+            for (var i = 1; i <= len; i++) {
+                for (var j = 1; j <= i; j++) {
+                    var s = document.createElement('span');
+                    s.innerHTML = i + 'x' + j + '=' + (i * j);
+                    await sleep(delay);
+                    box.appendChild(s);
+                    oHtml.push('<span>' + i + 'x' + j + '=' + (i * j) + '</span>');
+                }
+                var b = document.createElement('br');
+                box.appendChild(b);
+                oHtml.push('</br>');
+            }
+            return oHtml;
+        }
+
+        function render(len, delay) {
+            demo(len, delay).then(res => {
+                var r = res;
+                var l = 0;
+                var oTime = setInterval(function () {
+                    if (box.childNodes[res.length - l].nodeType == 1) {
+                        box.removeChild(box.childNodes[res.length - l]);
+                        l++;
+                    }
+                    if (l >= res.length) {
+                        box.innerHTML = r.join('');
+                        clearInterval(oTime)
+                    }
+                }, delay);
+            });
+        }
+        // 执行
+        render(9, 60);
+
+
+
+        // 豪情
+        // function create() {
+        //     var html = [];
+        //     for (var i = 1; i <= 9; i++) {
+        //         for (var j = 1; j <= i; j++) {
+        //             html.push('<span>' + j + '*' + i + '=' + (i * j) + '</span>');
+        //         }
+        //         html.push('<br/>');
+        //     }
+        //     return html;
+        // }
+
+        // function render() {
+        //     var html = create(),
+        //         i = 0,
+        //         tmp = create(),
+        //         j = html.length,
+        //         timer = null,
+        //         result = document.getElementById('result');
+        //     timer = setInterval(function () {
+        //         if (i > html.length) {
+        //             html.splice(html.length - 1, 1);
+        //             result.innerHTML = html.join('');
+        //         } else {
+        //             result.innerHTML += html[i++];
+        //         }
+        //         if (!html.length) {
+        //             result.innerHTML = tmp.join('');
+        //             clearInterval(timer);
+        //         }
+        //     }, 30);
+        // }
+        // render();
+
+        // 测试
+        // function arr() {
+        //     var arr = [];
+        //     arr.push([1,2,3,4,5]);
+        //     return arr;
+        // }
+        // var a = arr(),
+        //     b = arr();
+        // console.log(a == b);        // false
+    </script>
+</body>
+
+</html>

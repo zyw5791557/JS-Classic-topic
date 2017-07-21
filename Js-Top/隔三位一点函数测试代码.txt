@@ -1,0 +1,17 @@
+var testFun = function( callback,lblstr ){
+//callback 是你的方法 lblstr做标记的名称，测试字符串在函数内部。如有错误，自行改正。。切勿打脸（测试代码来源网上）
+ var teststr = '3345687687876789123';
+        var tipElem = document.createElement( 'div' ),
+        startTime,
+        duration = 0;
+        for( var j = 5; j > 0; j-- ){
+            startTime = +new Date();
+            for( var i = 10000; i > 0; i-- ){
+                callback(teststr);
+            }
+            duration = ((+new Date()) - startTime) + duration;
+        }
+        duration = (duration / 5).toFixed(0);
+        tipElem.innerHTML = lblstr + '总耗时：' + duration + ' ms';
+        document.body.appendChild( tipElem );
+    };

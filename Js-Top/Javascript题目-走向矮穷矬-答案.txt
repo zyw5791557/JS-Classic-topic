@@ -1,0 +1,101 @@
+题目1：
+获取正在执行的script元素标签。
+//by 司徒正美
+function getInteractiveScript(){
+    if(document.currentScript){
+        return document.currentScript;
+    }
+    var els = document.getElementsByTagName("script");
+    for(var i = 0, el; el = els[i++];){
+        if (el.readyState === 'interactive') {
+            return el
+        }
+    }
+    return null
+}
+题目2：
+对于一个input 需求 实现事件：onvaluechange（包括输入删除，复制粘贴等一切造成的值变化，兼容性嘿嘿）。
+下面是mass Framework的实现：
+define("valuechange", ["$event"], function(){
+    var DATA = "valuechangeData";
+    var ID  = "valuechangeID"
+    var interval = 50;
+    //如果值前后发生改变,触发绑定回调
+    function testChange(elem, type, poll) {
+        if(poll){
+            $._data(elem, ID, setTimeout(function(){
+                testChange(elem, type, poll);
+            },interval));
+        }
+        var old = $._data(elem, DATA);
+        var neo = elem.value;
+        if(old !== neo){
+            $._data(elem, DATA, neo);
+            var event = new $.Event("valuechange")
+            event.oldType = type
+            event.oldValue = old;
+            event.newValue = neo;
+            $.event.fire.call(elem, event)
+        }
+    }
+    function unTestChange(elem){
+        var id = $._removeData(elem, ID)
+        clearTimeout( id )
+        $.log($._removeData)
+        $._removeData(elem, DATA);
+    }
+   
+    function startTest(event) {
+        var elem = event.target;
+        if (event.type == 'focus' ) {
+            $._data(elem, DATA , elem.value);
+        }
+        testChange(elem,event.type, true);
+    }
+    function stopTest(event){
+        unTestChange(event.target)
+    }
+    
+    function listen(elem) {
+        unlisten(elem);
+        "keydown keyup mousedown focus".replace($.rword, function(name){
+            $(elem).bind(name+"._valuechange", startTest)
+        })
+        $(elem).bind('blur._valuechange', stopTest);
+        //http://liumiao.me/html/wd/W3C/264.html
+        $(elem).bind('webkitspeechchange._valuechange', function(e){
+            testChange(e.target,e.type)
+        });
+    }
+    function unlisten(elem){
+        unTestChange(elem)
+        $(elem).unbind("._valuechange")
+    }
+    $.fn.valuechange = function(callback){
+         return callback?  this.bind( "valuechange", callback ) : this.fire( "valuechange" );
+    }
+    $.eventAdapter.valuechange = {
+        setup: function(desc){
+            var elem = desc.currentTarget, nodeName = elem.tagName;
+            if (nodeName == 'INPUT' || nodeName == 'TEXTAREA') {
+                listen(elem);
+                return false
+            }
+        },
+        tearDown: function (desc) {
+            unlisten(desc.currentTarge);
+            return false
+        }
+    }
+})
+题目3：
+如何防止自己的页面被框架（frame）？
+百度代码：
+ if (top.location != self.location) {   
+                top.location = self.location;   
+            }
+
+
+题目4：（唯一给你机会秀智商的题目）
+将一段数字从右到左每隔三位插入一个逗号。（视频网站优酷土豆，观看点赞人数的显示方式）
+秀智商的。。==怎么可能有标准答案

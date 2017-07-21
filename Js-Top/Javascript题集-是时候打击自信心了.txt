@@ -1,0 +1,27 @@
+1.
+    var lowerCaseOnly =  /^[a-z]+$/;
+    [lowerCaseOnly.test(null), lowerCaseOnly.test()]
+2.
+"1 2 3".replace(/\d/g, parseInt)
+3.
+   function foo() { }
+    var oldName = foo.name;
+    foo.name = "bar";
+    [oldName, foo.name]
+4.
+    var a = /123/, b = /123/;
+    a == b
+    a === b
+
+5.
+  var a = {class: "Animal", name: 'Fido'};
+    a.class
+6.
+  console.log('one');
+setTimeout(function() {
+  console.log('two');
+}, 0);
+console.log('three');
+7.
+[1,2,3,4,5].duplicator(); // [1,2,3,4,5,1,2,3,4,5]
+×·¼Ó£ºÊä³ö[1,2,3,4,5,4,3,2,1]

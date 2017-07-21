@@ -1,0 +1,51 @@
+1.这些题也是秀智商
+window.alert = function(){};
+//your code;
+alert(1);
+//使后面的alert(1)能正确弹出
+
+
+答案：
+window.alert = function(){};
+window.alert=function(obj){
+    var iframe=document.createElement("iframe");
+    iframe.src="javascript:void(0);"
+    document.body.appendChild(iframe)
+    iframe.contentWindow.alert(obj);
+}
+alert(1)
+2.如何判定当前输入操作，是否使用了中文输入法？
+keydown时间加上判断e.keycode 
+文本区，文本域应用。
+3.如何判断是否是整数？
+(n|0)===n（正整数）;
+4.判定是否原生方法？（navtive code）
+作者：nwmathers。
+var isNative = (function() {
+    var s = (window.open + '').replace(/open/g, '');
+    return function(object, method) {
+      var m = object ? object[method] : false, r = new RegExp(method, 'g');
+      return !!(m && typeof m != 'string' && s === (m + '').replace(r, ''));
+    };
+  })();
+5.实现一下：
+如果当前函数是有名函数，则返回其名字，
+如果是匿名函数则返回被赋值的函数变量名，如果是闭包中匿名函数则返回“anonymous”。
+var getFnName = function(callee){
+      var _callee = callee.toString().replace(/[\s\?]*/g,""),
+      comb = _callee.length >= 50 ? 50 :_callee.length;
+      _callee = _callee.substring(0,comb);
+      var name = _callee.match(/^function([^\(]+?)\(/);
+      if(name && name[1]){
+        return name[1];
+      }
+      var caller = callee.caller,
+      _caller = caller.toString().replace(/[\s\?]*/g,"");
+      var last = _caller.indexOf(_callee),
+      str = _caller.substring(last-30,last);
+      name = str.match(/var([^\=]+?)\=/);
+      if(name && name[1]){
+        return name[1];
+      }
+      return "anonymous"
+    };

@@ -1,0 +1,6 @@
+1.css的伪元素和伪类的区别？
+2.repaint和reflow的区别？如何合适的减少repaint和reflow？
+3.Web Storage的优缺点？顺便谈下localstorage和sessionstorage还有cookie。
+4.浏览器加载样式文件方式 一种是link元素，另一种是CSS 2.1加入@import，比较不同。
+5.有关rem和em的用法，and 通常怎么做到移动端适配的。
+6.css 如何设置文本两端对齐。？

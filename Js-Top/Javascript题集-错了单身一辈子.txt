@@ -1,0 +1,17 @@
+所有问题都是问结果及why？
+1.
+delete [].length;
+2.
+vars: var vars = vars;
+3.
+[1,2,3,4,5][0..toString.length]
+4.
+'foo'.split('') + []
+5.
+x = 1; 
+(function(){
+return x;
+ var x = 2;
+}())
+6.
+Array(2).join()

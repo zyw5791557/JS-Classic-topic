@@ -1,0 +1,37 @@
+1.能翻墙的人类 可以参考如下链接（遍历过十几个相关的文章 觉得这个算不错的）
+https://davidwalsh.name/combining-js-arrays
+2.不能翻墙的可以参考 简略翻译。。
+对于数组
+var a = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
+var b = [ "foo", "bar", "baz", "bam", "bun", "fun" ];
+最终结果：
+[
+   1, 2, 3, 4, 5, 6, 7, 8, 9,
+   "foo", "bar", "baz", "bam" "bun", "fun"
+]
+大多数第一反应是 concat
+即是：var c = a.concat( b );
+注意 c 是新数组 此时内存使用 有c，a，b三个数组。
+小数组情况处理没有问题。那么大数组呢？
+那么第二种写法：
+// `b` onto `a`
+for (var i=0; i < b.length; i++) {
+    a.push( b[i] );
+}
+
+a; // [1,2,3,4,5,6,7,8,9,"foo","bar","baz","bam","bun","fun"]
+
+b = null;//垃圾回收
+很显然没有新数组的创建，对于内存来说 更优。
+注意到结尾的b=null; 拼接完成后将b数组清空。
+不喜欢for循环的 可以参考另一种写法：（更易于维护）
+// `b` onto `a`:
+a = b.reduce( function(coll,item){
+    coll.push( item );
+    return coll;
+}, a );
+更进一步简化：
+a.push.apply( a, b );
+es6写法：
+a.push( ...b )
+

@@ -1,0 +1,6 @@
+1.实现--自己猜
+function func1(arg1, arg2) { ... }
+
+var map = createArgumentMap(func1,'valueOfArg1', 'valueOfArg2');
+console.log(map['arg1']);  // writes 'valueOfArg1'
+console.log(map['arg2']);  // writes 'valueOfArg2'

@@ -1,0 +1,22 @@
+1.实现函数--defaultArguments
+功能如下：
+function add(a,b) { return a+b;};
+
+var add_ = defaultArguments(add,{b:9});
+add_(10); // returns 19
+add_(10,7); // returns 17
+add_(); // returns NaN
+
+add_ = defaultArguments(add_,{b:3, a:2});
+add_(10); // returns 13 now
+add_(); // returns 5
+
+add_ = defaultArguments(add_,{c:3}); // doesn't do anything, since c isn't an argument
+add_(10); // returns NaN
+add_(10,10); // returns 20
+
+奇葩情况
+如果函数如下：
+
+function add( a, // comments
+b /* more comments */ ) { return a+b;}

@@ -1,0 +1,45 @@
+所有问题都是问结果及why？
+1.
+delete [].length;
+false，知识点第一个在于delete能删除和不能删除什么
+面试问过；var声明的变量可否删除，window的自定义属性和给定的属性
+可不可以删除？
+2.
+vars: var vars = vars;
+冒号 在js里可以当做label使用 熟悉c语言知道goto的话会理解
+js里label可以和continue与break使用。
+eg：var x=1;
+foo:{
+    x=2;
+    break foo;
+    x=3;
+}
+console.log(x);//output 2
+3.
+[1,2,3,4,5][0..toString.length]
+第一个为什么是0..而不是0.前面出过的题有这个知识点
+这里简单说 0..阔以理解为(0.). 括号里面的0.被识别
+为数字，js是根据点识别出的 etc：你可以试试0.toString。括号外面的点是调用
+然后toString后面没有带括号，意味着得到是函数。
+函数的length 是形参
+toString形参有一个 radix（进制）
+所以答案：2
+4.
+'foo'.split('') + []
+类型转换和数组的toString方法。注意数组转换字符串
+自动加上的逗号。
+答案："f,o,o"
+
+5.
+x = 1; 
+(function(){
+return x;
+ var x = 2;
+}())
+这个错了 真の单身一辈子。==已经出国很多类似的题了
+6.
+Array(2).join()
+注意join的过程有toString,所以最后会出现一个逗号
+数组两个元素都是空
+答案：","
+

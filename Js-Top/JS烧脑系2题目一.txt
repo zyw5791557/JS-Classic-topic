@@ -1,0 +1,26 @@
+1.实现extend  
+extend( {a: 1, b: 2}, {c: 3} ) // should === {a: 1, b: 2, c: 3}
+extend( {a: 1, b: 2}, {c: 3}, {d: 4} ) // should === {a: 1, b: 2, c: 3, d: 4}
+extend( {a: 1, b: 2}, {a: 3, c: 3} ) // should  === {a: 1, b: 2, c: 3}
+extend( {a: false, b: null}, {a: true, b: 2, c: 3} ) // should  === {a: false, b: null, c: 3}
+。。。。。。。。
+//补充：原出题者情况说明较少 笔者补充一个arguments的情况过滤掉非object
+//NODE 下 可以直接用isObject函数进行 非node下
+//参考如下：
+//
+function isObject(val) {
+    if (val === null) { return false;}
+    return ( (typeof val === 'function') || (typeof val === 'object') );
+}
+
+1）arguments=
+{ 
+'0': { a: 1, b: 2, length: 6 },
+'1': [],
+'2': 'nope',
+'3': false,
+'4': [Function],
+'5': { c: 3, a: 3 } 
+}//   要过滤掉1,2,3,4
+
+

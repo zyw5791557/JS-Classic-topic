@@ -1,0 +1,26 @@
+题目1：
+获取正在执行的script元素标签。
+题目2：
+对于一个input 需求 实现事件：onvaluechange（包括输入删除，复制粘贴等一切造成的值变化，兼容性嘿嘿）。
+题目3：
+如何防止自己的页面被框架（frame）？
+eg：
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+        <title>装载别人的页面</title>
+        <script>var location=''</script>
+    </head>
+
+    <frameset cols="340px,*">
+        <frame src="你的页面"></frame>
+        <frame name="main" src="你的页面"></frame>
+    </frameset>
+
+    <noframes>
+        你的浏览器不支持框架网页！
+    </noframes>
+</html>
+题目4：（唯一给你机会秀智商的题目）
+将一段数字从右到左每隔三位插入一个逗号。（视频网站优酷土豆，观看点赞人数的显示方式）

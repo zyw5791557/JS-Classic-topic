@@ -1,0 +1,13 @@
+1.
+[]==[]
+Êä³ö£¿ÎªÊ²Ã´£¿
+2.
+[3.toString(),3..toString(),3...toString()]
+3.
+Array.isArray(Array.prototype)
+4.
+["1","2","3"].map(parseInt)
+5.
+var arr = Array(3);
+arr[0] = 2
+arr.map(function(elem){return '1';});

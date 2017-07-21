@@ -1,0 +1,68 @@
+1. 实现下列语法
+console.log(sum(2,3));   // Outputs 5
+console.log(sum(2)(3));  // Outputs 5
+答案：这道题，不解释，因为之前的问题里解答过。
+知识点：javascript 函数柯里化
+另外要加上形参判断。arguments.length
+2.结果和why？
+var a={},
+    b={key:'b'},
+    c={key:'c'};
+
+a[b]=123;
+a[c]=456;
+
+console.log(a[b]);
+答案：456
+首先a[b] 这里面b最后显示成什么？
+关于变量隐式转换，首先要确定，目标类型和原来类型，对象的a[]这种写法，里面添加的是属性名称
+而属性名称--string类型
+所以a[b]，b的原类型是object，目标是string类型。
+所以在
+执行a[b],实际上是执行了a[b.toString()]同理
+a[c]也一样
+那么上面的代码阔以看做
+a[b.toString()]=123;
+a[c.toString()]=456;
+Object类型的变量 执行toString() 结果都是同样的字符串。----"[object Object]"
+所以a["[object Object]"]=123;
+a["[object Object]"]=456;
+最后输出。
+3.
+var hero = {
+    _name: 'John Doe',
+    getSecretIdentity: function (){
+        return this._name;
+    }
+};
+
+var stoleSecretIdentity = hero.getSecretIdentity;
+
+console.log(stoleSecretIdentity());
+console.log(hero.getSecretIdentity());
+答案：这个，undefined，John Doe.
+这个还用说么。。OOOOOOO---==
+4.
+var arr1 = "john".split('');
+var arr2 = arr1.reverse();
+var arr3 = "jones".split('');
+arr2.push(arr3);
+console.log("array 1: length=" + arr1.length + " last=" + arr1.slice(-1));
+console.log("array 2: length=" + arr2.length + " last=" + arr2.slice(-1));
+答案：这个自己好好看看api的说明，不得不说细节决定成败
+5.
+var myObject = {
+    foo: "bar",
+    func: function() {
+        var self = this;
+        console.log("outer func:  this.foo = " + this.foo);
+        console.log("outer func:  self.foo = " + self.foo);
+        (function() {
+            console.log("inner func:  this.foo = " + this.foo);
+            console.log("inner func:  self.foo = " + self.foo);
+        }());
+    }
+};
+myObject.func();
+答案：执行一下就知道了。
+知识点：闭包分割作用域的时候，this被分割了没有？

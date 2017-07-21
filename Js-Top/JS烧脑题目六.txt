@@ -1,0 +1,5 @@
+1. µœ÷MagicFunction
+MagicFunction(3) == 3; // should return true 
+MagicFunction(1, 2) == 3; // should return true
+MagicFunction(1, 3)(2) == 6; // should return true
+MagicFunction(1, 2)(3, 4, 5)(6)(7, 10) == 38; // should return true *1+2+3+4+5+6+7+10=38£ª

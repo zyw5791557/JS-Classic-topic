@@ -1,0 +1,161 @@
+1.实现add
+add(123, "321") === "444";
+add("1234567890.0987654321", "8765432109.9012345678") === "9999999999.9999999999";
+add("1.2.3", 1.23); === NaN;
+add(0.1, 0.0001) === "0.1001";
+//your code 没思路的下拉
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.点赞最高
+var countDecimals = function (that) {
+    if(Math.floor(that.valueOf()) === that.valueOf()) return 0;
+    return that.toString().split(".")[1].length || 0; 
+}
+
+var isFalse = function(that) {
+    return that === false;
+}
+
+function add(){
+    if (!Array.prototype.map.call(arguments, function(arg) { return isNaN(arg); }).every(isFalse)) return NaN;
+    var factor = Math.max.apply(null, Array.prototype.map.call(arguments, function(arg) { return countDecimals(arg); }));
+    var multiply = parseInt(1 + '0'.repeat(factor), 10);
+    var sum = 0;
+    for (var i = 0; i < arguments.length; i++) {
+        sum += arguments[i] * multiply;
+    }
+    return (sum / multiply).toString();
+}
+2.//writen by maosi for small white
+function add(){
+//implement  
+  
+var args=Array.prototype.slice.call(arguments);
+  if(isNaN(args[0])||isNaN(args[1])) return NaN;
+
+  var max=0;
+  args.forEach(function(i){
+  if(/[.]/g.test(i.toString())){
+  var len=i.toString().split(".")[1].length;
+  if(len>=max){max=len;}
+  }
+  });
+  var ex=0;
+ var r= args.reduce(function(p,c){
+    if(max==0){
+    var n1=[Number(c),0];
+    }else{
+    var n1=Number(c).toFixed(max).split(".");
+    }
+  
+    p[0]=Number(p[0])+Number(n1[0]);
+    p[1]=Number(p[1])+Number(n1[1]);
+
+   if(p[1].toString().length>max){
+   
+      ex= p[1].toString().substr(0,1); 
+     p[1]=p[1].toString().substr(1);
+     p[0]+=Number(ex);
+   }
+    return p
+  },[0,0]);
+  if(r[1]==0){
+  return r[0].toString();
+  }else{
+   return r.join(".").replace(/[0]+$/g,"");
+  }
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
